@@ -3,6 +3,7 @@ import com.facebook.react.ReactPackage;
 
 import com.facebook.react.ReactPackage;
 import com.reactnativenavigation.NavigationApplication;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +21,8 @@ public class MainApplication extends NavigationApplication {
         // Add additional packages you require here
         // No need to add RnnPackage and MainReactPackage
         return Arrays.<ReactPackage>asList(
-             new VectorIconsPackage()
+             new VectorIconsPackage(),
+             new RNGestureHandlerPackage()
         );
     }
 
