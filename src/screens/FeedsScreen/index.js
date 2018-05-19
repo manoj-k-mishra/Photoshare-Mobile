@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, } from 'react-native';
+import { ScrollView, Text, StyleSheet, } from 'react-native';
 import { PhotoCard } from '../../components'
 
 const styles = StyleSheet.create(
-{  root: {  minHeight: 800,  backgroundColor: 'pink', },
+{  root: {  minHeight: 800,  backgroundColor: 'pink', paddingBottom: 10 },
 });
 
 class FeedsScreen extends Component 
 {  state={}
     render(){  return(
-                        <View style={styles.root}>
+                        <ScrollView style={styles.root}>
                             <PhotoCard/>
                             <Text>FeedScreen</Text>
-                        </View>
+                        </ScrollView>
                     );
             }
 
