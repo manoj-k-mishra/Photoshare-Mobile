@@ -1,0 +1,1 @@
+export const fakeAvatar = 'https://media.licdn.com/dms/image/C4D03AQFonWJd0W7czA/profile-displayphoto-shrink_100_100/0?e=1531958400&v=beta&t=hUCnIzHLkavCen_LpBN0X1nE6H9AqRlVRzZSDmlKb8M'
