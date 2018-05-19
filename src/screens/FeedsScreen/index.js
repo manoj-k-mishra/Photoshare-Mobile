@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet, } from 'react-native';
 import { PhotoCard } from '../../components'
+
+const styles = StyleSheet.create(
+{  root: {  minHeight: 800,  backgroundColor: 'pink', },
+});
 
 class FeedsScreen extends Component 
 {  state={}
     render(){  return(
-                        <View>
+                        <View style={styles.root}>
                             <PhotoCard/>
                             <Text>FeedScreen</Text>
                         </View>
@@ -13,6 +17,5 @@ class FeedsScreen extends Component
             }
 
 }
-
 
 export default FeedsScreen;
