@@ -5,6 +5,7 @@ import { fakeAvatar } from '../../utils/constants';
 import { gestureHandlerRootHOC } from 'react-native-gesture-handler'
 import Touchable from '@appandflow/touchable';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { human, systemWeights } from 'react-native-typography';
 
 const styles = StyleSheet.create({
     root: {  height: 60, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 16, },
@@ -13,8 +14,8 @@ const styles = StyleSheet.create({
     avatarWrapper: {  flex: 0.15,  justifyContent: 'center',  alignItems: 'center',  },
     avatarImg: {  ...makeCircle(40),  },
     userInfoWrapper: {  justifyContent: 'center',  flex: 1, paddingLeft: 10, },
-    username: {   },
-    location: {   },
+    username: {  ...human.subheadObject,      },
+    location: {   ...human.footnoteObject,  ...systemWeights.light,      },
   });
 
 export default function Header()
@@ -27,11 +28,9 @@ export default function Header()
                       <Text style={styles.username}>User</Text>
                      <Text style={styles.location}>Location</Text>
                 </View>
-                <Touchable  feedback="opacity"
-                    style={styles.btnWrapper}
-                  >
+                <Touchable  feedback="opacity" style={styles.btnWrapper} >
                     <MaterialCommunityIcons name="dots-horizontal" size={25} />
-                  </Touchable>
+                </Touchable>
               </View>
             );
 }
