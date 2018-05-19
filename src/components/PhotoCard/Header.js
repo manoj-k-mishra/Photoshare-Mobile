@@ -18,15 +18,19 @@ const styles = StyleSheet.create({
     location: {   ...human.footnoteObject,  ...systemWeights.light,      },
   });
 
-export default function Header()
+export default function Header({
+  avatar = fakeAvatar,
+  username = 'Manoj',
+  location = 'Mel, Aus',
+})
 {    return( <View style={styles.root}>
                 <View style={styles.userMetaWrapper}></View>
                 <View style={styles.avatarWrapper}>
-                    <Image source={{ uri: fakeAvatar}} style={styles.avatarImg}/>
+                    <Image source={{ uri: avatar}} style={styles.avatarImg}/>
                 </View>
                 <View style={styles.userInfoWrapper}>
-                      <Text style={styles.username}>User</Text>
-                     <Text style={styles.location}>Location</Text>
+                      <Text style={styles.username}>{username}</Text>
+                     <Text style={styles.location}>{location}</Text>
                 </View>
                 <Touchable  feedback="opacity" style={styles.btnWrapper} >
                     <MaterialCommunityIcons name="dots-horizontal" size={25} />
