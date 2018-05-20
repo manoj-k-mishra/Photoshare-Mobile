@@ -20,7 +20,8 @@ class PhotoCard extends Component {
     return (
       <View style={styles.root}>
         <Header />
-   
+   <Image style={styles.img} source={{ uri: 'https://www.what-dog.net/Images/faces2/scroll001.jpg' }} />
+
         <ActionBtns />
       </View>
     );
