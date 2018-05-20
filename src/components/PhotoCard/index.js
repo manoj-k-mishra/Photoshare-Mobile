@@ -1,23 +1,30 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
+
 import Header from './Header';
+import ActionBtns from './ActionBtns';
 
 const styles = StyleSheet.create({
-            root: {  minHeight: 800,   paddingBottom: 10,},
-            img:{flex:1}
-            });
-class PhotoCard extends Component 
-{   state = {};
-    render() { return (
-                        <View style={styles.root}>
-                        <Header />
-                        < Image
-                        style = { styles.img  }
-                        source = {{ uri:'https://www.breezway.com.au/wp-content/uploads/sites/11/2016/09/Dowell-Smithfield-Showroom-1.jpg'}} />
-                        <Text>Hello PhotoCard</Text>
-                        </View>
-                    );
-            }
+  root: {
+    minHeight: 800,
+    paddingBottom: 20,
+  },
+  img: {  //height: 30,
+    flex: 1
   }
-  
-  export default PhotoCard;
+});
+
+class PhotoCard extends Component {
+  state = {};
+  render() {
+    return (
+      <View style={styles.root}>
+        <Header />
+   
+        <ActionBtns />
+      </View>
+    );
+  }
+}
+
+export default PhotoCard;
