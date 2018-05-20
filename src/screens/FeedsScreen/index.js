@@ -3,7 +3,7 @@ import { ScrollView, Text, StyleSheet, } from 'react-native';
 import { PhotoCard } from '../../components'
 
 const styles = StyleSheet.create(
-{  root: {  minHeight: 800,  backgroundColor: 'pink', paddingBottom: 10 },
+{  root: {  minHeight: 800,  backgroundColor: 'white', paddingBottom: 10 },
 });
 
 class FeedsScreen extends Component 
