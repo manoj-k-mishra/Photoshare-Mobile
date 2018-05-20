@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { makeCircle } from '../../utils/themes';
+import { makeCircle, makeHitSlop } from '../../utils/themes';
 import { fakeAvatar } from '../../utils/constants';
 import { gestureHandlerRootHOC } from 'react-native-gesture-handler'
 import Touchable from '@appandflow/touchable';
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 
 export default function Header({
   avatar = fakeAvatar,
-  username = 'Manoj',
+  username = 'User:Manoj(Header.js)',
   location = 'Mel, Aus',
 })
 {    return( <View style={styles.root}>
