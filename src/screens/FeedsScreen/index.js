@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList,ActivityIndicator, View, ScrollView, Text, StyleSheet, } from 'react-native';
+import { FlatList,ActivityIndicator, View, StyleSheet,RefreshControl } from 'react-native';
 import { PhotoCard } from '../../components';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
@@ -9,9 +9,14 @@ const styles = StyleSheet.create(
 });
 
 class FeedsScreen extends Component 
-{  state={};
+{  state={ isRefreshing: false};
    _keyExtractor = item => item.id;
    _renderItem = ({ item }) => <PhotoCard data={item} />;
+   _refreshRequest = async () => 
+    {   this.setState({ isRefreshing: true })
+        await this.props.data.refetch()
+        this.setState({ isRefreshing: false })
+    }
     render() 
     {
             console.log('============================');
@@ -28,6 +33,11 @@ class FeedsScreen extends Component
                         data={this.props.data.photos}
                         keyExtractor={this._keyExtractor}
                         renderItem={this._renderItem}
+                        refreshControl={ <RefreshControl
+                                            refreshing={this.state.isRefreshing}
+                                            onRefresh={this._refreshRequest}
+                                         />
+                                     }
                         />
                     );
     }

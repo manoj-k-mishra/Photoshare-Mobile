@@ -24,9 +24,9 @@ class PhotoCard extends Component {
       <View style={styles.root}>
      
         <Header />
-
+<Image style={styles.img} source={{ uri: this.props.data.imageUrl }} />
         <ActionBtns />
-        <Meta/>
+        <Meta caption={this.props.data.caption}/>
          <View style={styles.commentsWrapper}>
           <Touchable feedback="opacity">
             <Text style={styles.commentViewAll}>View all 10 comments</Text>
@@ -36,7 +36,7 @@ class PhotoCard extends Component {
         <View style={styles.timeAgoWrapper}>
           <Text style={styles.timeAgo}>6 HOURS AGO</Text>
         </View>
-            <Image style={styles.img} source={{ uri: 'https://www.what-dog.net/Images/faces2/scroll001.jpg' }} />
+            
       </View>
     );
   }
