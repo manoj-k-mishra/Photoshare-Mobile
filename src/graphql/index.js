@@ -5,8 +5,10 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 const cache = new InMemoryCache();
 
 const link = new HttpLink({
- // uri: 'http://localhost:4000/api/graphql',
-  uri: 'http://192.168.0.5:4000/api/graphql',
+
+ //uri:'http://10.133.44.111:4000/api/graphql',
+  uri: 'http://192.168.0.3:4000/api/graphql',
+  
 });
 
 export const client = new ApolloClient({

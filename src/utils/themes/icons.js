@@ -8,7 +8,8 @@ const replaceSuffixPattern = /--(active|big|small|very-big)/g;
 const icons = {  home: [navIconSize, Entypo],  'ios-search': [navIconSize, Ionicons], };
 const iconsMap = {};
 
-const iconsLoaded = new Promise((resolve, reject) => 
+//const iconsLoaded = new Promise((resolve, reject) => //make it a function---so react not required
+const iconsLoaded = () => new Promise((resolve) =>
 {  new Promise.all( Object.keys(icons).map(iconName => 
                     { const Provider = icons[iconName][1];
                       return Provider.getImageSource( iconName.replace(replaceSuffixPattern, ''),

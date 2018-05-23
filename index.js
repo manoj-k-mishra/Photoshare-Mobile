@@ -2,5 +2,7 @@
 //import App from './App';
 //AppRegistry.registerComponent('instagram_mobile', () => App);
 
-import Nav from './src/Nav'
-const App = new Nav()
+//import Nav from './src/Nav'
+//const App = new Nav()
+import { init } from './src/Nav';
+init();

@@ -16,13 +16,14 @@ const styles = StyleSheet.create({
   timeAgoWrapper: { height: 70, justifyContent: 'center', alignItems: 'flex-start',  paddingHorizontal: 16,  },
   timeAgo: {    ...human.footnoteObject,    color: iOSColors.midGray,  },
 });
-
+//<Image style={styles.img} source={{ uri: 'https://www.what-dog.net/Images/faces2/scroll001.jpg' }} />
+ //  <Meta caption={this.props.data.caption}/>
+ //<Image style={styles.img} source={{ uri: this.props.data.imageUrl }} />
 class PhotoCard extends Component {
   state = {};
   render() {
     return (
       <View style={styles.root}>
-     
         <Header />
 <Image style={styles.img} source={{ uri: this.props.data.imageUrl }} />
         <ActionBtns />
