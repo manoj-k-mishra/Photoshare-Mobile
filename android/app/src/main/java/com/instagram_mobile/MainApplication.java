@@ -4,6 +4,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.ReactPackage;
 import com.reactnativenavigation.NavigationApplication;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +23,8 @@ public class MainApplication extends NavigationApplication {
         // No need to add RnnPackage and MainReactPackage
         return Arrays.<ReactPackage>asList(
              new VectorIconsPackage(),
-             new RNGestureHandlerPackage()
+             new RNGestureHandlerPackage(),
+             new LinearGradientPackage()
         );
     }
 
