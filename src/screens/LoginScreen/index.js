@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import {View,Text,StyleSheet,StatusBar,TextInput,AsyncStorage,ActivityIndicator,} from 'react-native';
+import {View,Text,StyleSheet,StatusBar,TextInput,AsyncStorage,ActivityIndicator,TouchableOpacity} from 'react-native';
 import { iOSColors, human, systemWeights } from 'react-native-typography';
 import { fonts } from '../../utils/themes';
 import LinearGradient from 'react-native-linear-gradient';
 import Touchable from '@appandflow/touchable';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { LoginManager, AccessToken } from 'react-native-fbsdk';
+
 const COLORS_GRADIENTS = ['#74398D', '#56499E'];
 
 const styles = StyleSheet.create({
   root: { flex: 1,    justifyContent: 'center',    alignItems: 'center',  },
-  header: { flex: 0.25,    alignSelf: 'stretch',    justifyContent: 'center',    alignItems: 'center',  },
+  header: { flex: 0.3,    alignSelf: 'stretch',    justifyContent: 'center',    alignItems: 'center',  },
   appName: { color: iOSColors.white,    fontSize: 50,    fontFamily: fonts.lobster,  },
   content: { flex: 1, alignSelf: 'stretch',  },
   section: {flex: 1,justifyContent: 'center',alignItems: 'center',alignSelf: 'stretch', },
@@ -32,46 +34,34 @@ const styles = StyleSheet.create({
 });
 class LoginScreen extends Component 
 {  state = {};
+
+
+
+ _onLoginFbPress = async () => {
+    console.log('=========FB=clicked==========================');
+  const res = await LoginManager.logInWithReadPermissions([
+        'public_profile',
+       // 'email',
+      ]);
+      console.log("========RES============================", res);
+ };
    render() 
    {
+     console.log('======inside render===============');
       return (
-        <View style={styles.root}>
-          <StatusBar barStyle="light-content" />
-          <LinearGradient colors={COLORS_GRADIENTS}  start={{ x: 0.0, y: 0.0 }} end={{ x: 1.0, y: 1.0 }}style={styles.header}>
-            <Text style={styles.appName} >Login Screen</Text>
-          </LinearGradient>
-            <View style={styles.content} >
-              <View style={styles.section} >
-                <View style={styles.inputWrapper}>
-                   <TextInput underlineColorAndroid="transparent" style={styles.input} placeholder="Email"/>
-                </View>
-                <View style={styles.inputWrapper}>
-                  <TextInput underlineColorAndroid="transparent" style={styles.input} placeholder="Password"/>
-                </View>
-                <Touchable style={styles.loginBtn} feedback="opacity"><Text style={styles.loginBtnText}>Login</Text></Touchable>
-                <View style={styles.forgotWrapper}>
-                    <Text style={styles.callout}>Forgot your login details? </Text>
-                    <Touchable feedback="opacity"><Text style={styles.btnText}>Get help signing in.</Text></Touchable>
-                </View>
-              </View>
-
-              <View style={styles.orWrapper}>
-                <View style={styles.orDivider} />
-                  <View style={styles.orTextWrapper}><Text style={styles.orText}>OR</Text></View>
-                  <View style={styles.orDivider} />
-                </View>
-                <View style={[styles.section, styles.sectionBottom]}>
-                    <Touchable  style={styles.fbLoginBtn} feedback="opacity">
-                      <MaterialCommunityIcons size={30} name="facebook-box" color="#318DEE"/>
-                      <Text style={styles.fbLoginBtnText}>Continue with Facebook</Text>
-                    </Touchable>
-                </View>
-                <View style={styles.noAccountWrapper}>
-                    <Text style={styles.callout}>Don't have an account? </Text>
-                    <Touchable feedback="opacity"><Text style={styles.btnText}>Sign up.</Text></Touchable>
-                </View>
-              </View>
+        <View style={styles.container}>
+       <TouchableOpacity
+         style={styles.button}
+         onPress={this._onLoginFbPress}
+       >
+         <Text> Touch Here </Text>
+       </TouchableOpacity>
+       <View style={[styles.countContainer]}>
+         <Text style={[styles.countText]}>
+            { this.state.count !== 0 ? this.state.count: null}
+          </Text>
         </View>
+      </View>
         );
     }
 }

@@ -1,8 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.instagram_mobile">
+    package="com.instagram_mobile"
+    android:versionCode="1"
+    android:versionName="1.0">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+ 
 
     <application
       android:name=".MainApplication"
@@ -22,7 +25,7 @@
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-        <provider android:authorities="com.facebook.app.FacebookContentProvider612900195733620"
+        <provider android:authorities="com.facebook.app.FacebookContentProvider165512644287164"
             android:name="com.facebook.FacebookContentProvider"
             android:exported="true" />
     </application>
