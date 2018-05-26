@@ -5,6 +5,8 @@ import com.facebook.react.ReactPackage;
 import com.reactnativenavigation.NavigationApplication;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
+import com.facebook.CallbackManager;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,6 +14,12 @@ import com.oblador.vectoricons.VectorIconsPackage;
 
 public class MainApplication extends NavigationApplication {
 
+    private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
+
+    protected static CallbackManager getCallbackManager() {
+        return mCallbackManager;
+    }
+    
     @Override
     public boolean isDebug() {
         // Make sure you are using BuildConfig from your own application
@@ -24,7 +32,8 @@ public class MainApplication extends NavigationApplication {
         return Arrays.<ReactPackage>asList(
              new VectorIconsPackage(),
              new RNGestureHandlerPackage(),
-             new LinearGradientPackage()
+             new LinearGradientPackage(),
+             new FBSDKPackage(mCallbackManager)
         );
     }
 
