@@ -8,4 +8,4 @@
 3. Start server as mentioned in repo- https://github.com/manojkmishra/Photoshare-backend
 4. Start android emulator.
 5. react-native run-android
-![enter image description here](https://github.com/manojkmishra/Photoshare-Mobile/blob/master/screenshots/createdatabase.PNG)
+![enter image description here](https://github.com/manojkmishra/Photoshare-Mobile/blob/master/screenshots/loginscreen.PNG)
