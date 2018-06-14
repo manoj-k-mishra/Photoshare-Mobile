@@ -36,17 +36,12 @@ class LoginScreen extends Component
 {  state = {};
 
 
- _onLoginFbPress = async () => {
-     console.log('1Continue with fb clicked');
-      const res = await LoginManager.logInWithReadPermissions(['public_profile']);
-      console.log('res',res);
-      console.log('done');
-       if (res.grantedPermissions && !res.isCancelled) {
-         const data = await AccessToken.getCurrentAccessToken();
-       console.log('data', data);
-       }
-
-
+ _onLoginFbPress = async () => {//alert('Login clicked');
+ console.log('fb clicked');
+  const res = await LoginManager.logInWithReadPermissions(['public_profile']);
+ // alert('Login success with permissions: ' +res.grantedPermissions.toString());
+  console.log('res',res);
+  
  };
    render() 
    {
