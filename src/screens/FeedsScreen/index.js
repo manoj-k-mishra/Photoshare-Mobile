@@ -20,7 +20,7 @@ class FeedsScreen extends Component
     render() 
     {
             console.log('============================');
-            console.log('this is the props', this.props);
+            console.log('/src/feedscreen/index.js- this.props=', this.props);
             console.log('============================');
              if (this.props.data.loading) 
              {  return (

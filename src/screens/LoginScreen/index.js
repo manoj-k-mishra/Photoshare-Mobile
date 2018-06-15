@@ -8,6 +8,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
 import gql from 'graphql-tag';  //for query mutation
 import { graphql } from 'react-apollo'; //graphql wrapper
+import { authToken } from '../../utils/constants';
+import { startMainApp } from '../../Nav';
 
 const COLORS_GRADIENTS = ['#74398D', '#56499E'];
 
@@ -37,7 +39,7 @@ const styles = StyleSheet.create({
 class LoginScreen extends Component 
 {  state = {};
  _onLoginFbPress = async () => 
-   {console.log('fb clicked');
+  {console.log('fb clicked');
     const res = await LoginManager.logInWithReadPermissions(['public_profile', 'email']);
     console.log('/src/screens/loginscreen/index.js- res=',res);
     if(res.grantedPermissions && !res.isCancelled)
@@ -46,10 +48,15 @@ class LoginScreen extends Component
       if(data)
       { const serverResponse = await this.props.loginMutation({variables: {provider: 'FACEBOOK', token: data.accessToken, }, });
         console.log('/src/screens/loginscreen/index.js- serverResponse=', serverResponse);
+        const { token } = serverResponse.data.login;
+        try {  await AsyncStorage.setItem(authToken,token); //so authToken gets the value of jwt----and now user logs in--main screen should come
+               this.setState({ loading: false });
+               startMainApp();
+            } catch (error) { throw error; }
+       
       }
     }
-  
- };
+  };
    render() 
    { console.log('/src/screens/loginscreen/index.js- this.props=', this.props)
       return (

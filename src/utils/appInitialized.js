@@ -6,10 +6,10 @@ import { startLogin, startMainApp } from '../Nav';
 
 export default async function appInitialized() 
 {  await iconsLoaded();
-  // const token = await AsyncStorage.getItem(authToken);
-   const token = await AsyncStorage.getItem('@instagram_mobile/token');
-  // const token = await AsyncStorage.removeItem(authToken);
-if (!token) { startLogin(); } 
+   const token = await AsyncStorage.getItem(authToken);
+ //  const token = await AsyncStorage.getItem('@instagram_mobile/token');
+ // const token = await AsyncStorage.removeItem(authToken);
+ if (!token) { startLogin(); } 
 //  if (token) { startLogin(); } 
   else { startMainApp(); }
 }
