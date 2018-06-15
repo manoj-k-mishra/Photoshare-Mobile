@@ -6,6 +6,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import Touchable from '@appandflow/touchable';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
+import gql from 'graphql-tag';  //for query mutation
+import { graphql } from 'react-apollo'; //graphql wrapper
 
 const COLORS_GRADIENTS = ['#74398D', '#56499E'];
 
@@ -34,63 +36,78 @@ const styles = StyleSheet.create({
 });
 class LoginScreen extends Component 
 {  state = {};
-
-
- _onLoginFbPress = async () => {//alert('Login clicked');
- console.log('fb clicked');
-  const res = await LoginManager.logInWithReadPermissions(['public_profile']);
- // alert('Login success with permissions: ' +res.grantedPermissions.toString());
-  console.log('res',res);
+ _onLoginFbPress = async () => 
+   {console.log('fb clicked');
+    const res = await LoginManager.logInWithReadPermissions(['public_profile', 'email']);
+    console.log('/src/screens/loginscreen/index.js- res=',res);
+    if(res.grantedPermissions && !res.isCancelled)
+    { const data= await AccessToken.getCurrentAccessToken();
+      console.log('/src/screens/loginscreen/index.js- data=', data);
+      if(data)
+      { const serverResponse = await this.props.loginMutation({variables: {provider: 'FACEBOOK', token: data.accessToken, }, });
+        console.log('/src/screens/loginscreen/index.js- serverResponse=', serverResponse);
+      }
+    }
   
  };
    render() 
-   {
+   { console.log('/src/screens/loginscreen/index.js- this.props=', this.props)
       return (
         <View style={styles.root}>
           <StatusBar barStyle="light-content" />
           <LinearGradient colors={COLORS_GRADIENTS}  start={{ x: 0.0, y: 0.0 }} end={{ x: 1.0, y: 1.0 }}style={styles.header}>
             <Text style={styles.appName} >Login Screen</Text>
           </LinearGradient>
-            <View style={styles.content} >
-              <View style={styles.section} >
-                <View style={styles.inputWrapper}>
-                   <TextInput underlineColorAndroid="transparent" style={styles.input} placeholder="Email"/>
-                </View>
-                <View style={styles.inputWrapper}>
-                  <TextInput underlineColorAndroid="transparent" style={styles.input} placeholder="Password"/>
-                </View>
-                <Touchable onPress={this._onLoginFbPress} style={styles.loginBtn} feedback="opacity"><Text style={styles.loginBtnText}>Login</Text></Touchable>
-                <View style={styles.forgotWrapper}>
+          <View style={styles.content} >
+            <View style={styles.section} >
+              <View style={styles.inputWrapper}> 
+                <TextInput underlineColorAndroid="transparent" style={styles.input} placeholder="Email"/> 
+              </View>
+              <View style={styles.inputWrapper}> 
+                <TextInput underlineColorAndroid="transparent" style={styles.input} placeholder="Password"/>
+              </View>
+              <Touchable onPress={this._onLoginFbPress} style={styles.loginBtn} feedback="opacity">
+                 <Text style={styles.loginBtnText}>Login</Text>
+              </Touchable>
+              <View style={styles.forgotWrapper}>
                     <Text style={styles.callout}>Forgot your login details? </Text>
-                    <Touchable feedback="opacity"><Text style={styles.btnText}>Get help signing in.</Text></Touchable>
-                </View>
+                    <Touchable feedback="opacity">
+                       <Text style={styles.btnText}>Get help signing in.</Text>
+                    </Touchable>
               </View>
-
-          <View style={styles.orWrapper}>
-            <View style={styles.orDivider} />
-            <View style={styles.orTextWrapper}>
-              <Text style={styles.orText}>OR</Text>
             </View>
-            <View style={styles.orDivider} />
-          </View>
-                          <View style={[styles.section, styles.sectionBottom]}>
-            <TouchableOpacity
-              style={styles.fbLoginBtn}
-              onPress={this._onLoginFbPress}
-               feedback = "opacity"
-            >
-              <MaterialCommunityIcons size={30} name="facebook-box" color="#318DEE"/>
-              <Text style={styles.fbLoginBtnText}>Continue with Facebook</Text>
-            </TouchableOpacity>
-          </View>
-                <View style={styles.noAccountWrapper}>
-                    <Text style={styles.callout}>Don't have an account? </Text>
-                    <Touchable feedback="opacity"><Text style={styles.btnText}>Sign up.</Text></Touchable>
-                </View>
+            <View style={styles.orWrapper}>
+              <View style={styles.orDivider} />
+              <View style={styles.orTextWrapper}> 
+                 <Text style={styles.orText}>OR</Text> 
               </View>
+              <View style={styles.orDivider} />
+            </View>
+            <View style={[styles.section, styles.sectionBottom]}>
+              <TouchableOpacity style={styles.fbLoginBtn} onPress={this._onLoginFbPress} feedback = "opacity">
+                <MaterialCommunityIcons size={30} name="facebook-box" color="#318DEE"/>
+                <Text style={styles.fbLoginBtnText}>Continue with Facebook</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.noAccountWrapper}>
+              <Text style={styles.callout}>Don't have an account? </Text>
+              <Touchable feedback="opacity">
+                <Text style={styles.btnText}>Sign up.</Text>
+              </Touchable>
+            </View>
+            
+          </View>
         </View>
         );
     }
 }
-export default LoginScreen;
+
+const loginMutation = gql`
+  mutation($provider: Provider, $token: String) 
+  {  login(provider: $provider, token: $token) {   token }
+  }
+`;
+
+//export default LoginScreen;
+export default graphql(loginMutation, { name: 'loginMutation' })(LoginScreen);
 

@@ -6,8 +6,8 @@ const cache = new InMemoryCache();
 
 const link = new HttpLink({
 
- //uri:'http://10.133.44.111:4000/api/graphql',
-  uri: 'http://192.168.0.3:4000/api/graphql',
+ uri:'http://10.133.44.151:4000/api/graphql',
+ // uri: 'http://192.168.0.3:4000/api/graphql',
   
 });
 
