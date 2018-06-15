@@ -37,9 +37,10 @@ const styles = StyleSheet.create({
   noAccountWrapper: { height: 50,width: '100%',borderColor: '#ECECEC',borderTopWidth: 1,justifyContent: 'center',alignItems: 'center', flexDirection: 'row', },
 });
 class LoginScreen extends Component 
-{  state = {};
+{  state = { loading: false,};
  _onLoginFbPress = async () => 
-  {console.log('fb clicked');
+  { this.setState({ loading: true });
+    console.log('fb clicked');
     const res = await LoginManager.logInWithReadPermissions(['public_profile', 'email']);
     console.log('/src/screens/loginscreen/index.js- res=',res);
     if(res.grantedPermissions && !res.isCancelled)
@@ -59,6 +60,12 @@ class LoginScreen extends Component
   };
    render() 
    { console.log('/src/screens/loginscreen/index.js- this.props=', this.props)
+     if (this.state.loading) 
+      {  return (   <View style={styles.root}>
+                      <ActivityIndicator size="large" color="#318DEE" />
+                    </View>
+                );
+      }
       return (
         <View style={styles.root}>
           <StatusBar barStyle="light-content" />
