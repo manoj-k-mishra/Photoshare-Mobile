@@ -7,6 +7,8 @@ import Meta from './Meta';
 import Touchable from '@appandflow/touchable';
 import { human, iOSColors } from 'react-native-typography';
 import CommentInput from '../CommentInput';
+import { graphql } from 'react-apollo';
+import { likePhotoMutation } from '../../graphql/mutations';
 
 const styles = StyleSheet.create({
   root: {    minHeight: 800,    paddingBottom: 10,  },
@@ -19,28 +21,27 @@ const styles = StyleSheet.create({
 //<Image style={styles.img} source={{ uri: 'https://www.what-dog.net/Images/faces2/scroll001.jpg' }} />
  //  <Meta caption={this.props.data.caption}/>
  //<Image style={styles.img} source={{ uri: this.props.data.imageUrl }} />
-class PhotoCard extends Component {
-  state = {};
-  render() {
-    return (
-      <View style={styles.root}>
-        <Header />
-<Image style={styles.img} source={{ uri: this.props.data.imageUrl }} />
-        <ActionBtns />
-        <Meta caption={this.props.data.caption}/>
-         <View style={styles.commentsWrapper}>
-          <Touchable feedback="opacity">
-            <Text style={styles.commentViewAll}>View all 10 comments</Text>
-          </Touchable>
-          < CommentInput />
-        </View>
-        <View style={styles.timeAgoWrapper}>
-          <Text style={styles.timeAgo}>6 HOURS AGO</Text>
-        </View>
-            
-      </View>
-    );
+class PhotoCard extends Component 
+{ state = {};
+  render() 
+  { console.log('/src/components/PhotoCard/index.js- this.props',this.props)
+    return ( <View style={styles.root}>
+               <Header />
+               <Image style={styles.img} source={{ uri: this.props.data.imageUrl }} />
+               <ActionBtns />
+               <Meta caption={this.props.data.caption}/>
+                 <View style={styles.commentsWrapper}>
+                   <Touchable feedback="opacity">
+                     <Text style={styles.commentViewAll}>View all 10 comments</Text>
+                   </Touchable>
+                   < CommentInput />
+                 </View>
+                 <View style={styles.timeAgoWrapper}>
+                   <Text style={styles.timeAgo}>6 HOURS AGO</Text>
+                 </View>
+              </View>
+           );
   }
 }
-
-export default PhotoCard;
+export default graphql(likePhotoMutation)(PhotoCard);
+//export default PhotoCard;
